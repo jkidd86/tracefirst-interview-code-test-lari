@@ -3,7 +3,7 @@ class VeterinariansController < ApplicationController
   rescue_from ActiveRecord::InvalidForeignKey, with: :invalid_foreign_key
 
   def index
-    @veterinarians = Veterinarian.all
+    @veterinarians = Veterinarian.active
   end
 
   def show; end
