@@ -42,11 +42,11 @@ class AnimalsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to animal_url(@animal)
   end
 
-  test 'should destroy animal' do
-    assert_difference('Animal.count', -1) do
-      delete animal_url(animals(:animal_two))
-    end
-
+  test 'should soft delete animal' do
+    animal = animals(:animal_two)
+    delete animal_url(animal)
+    animal.reload
+    assert_not_nil animal.deleted_at
     assert_redirected_to animals_url
   end
 end
