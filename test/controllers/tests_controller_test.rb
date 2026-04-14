@@ -10,6 +10,14 @@ class TestsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'index preloads animals and veterinarians tables' do
+    #includes uses preload, if it switches to eager_load this will change
+    assert_queries_count(3) do
+      get tests_url
+    end
+    assert_response :success
+  end
+
   test 'should get new' do
     get new_test_url
     assert_response :success
