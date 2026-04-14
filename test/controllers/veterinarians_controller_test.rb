@@ -44,6 +44,11 @@ class VeterinariansControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to veterinarian_url(@veterinarian)
   end
 
+  test 'should not allow admin role to be added' do
+    patch veterinarian_url(@veterinarian), params: { veterinarian: { admin: true } }
+    assert_not @veterinarian.reload.admin
+  end
+
   test 'should destroy veterinarian' do
     assert_difference('Veterinarian.count', -1) do
       delete veterinarian_url(veterinarians(:veterinarian_two))
