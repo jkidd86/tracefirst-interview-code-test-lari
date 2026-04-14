@@ -1,6 +1,6 @@
 class AnimalsController < ApplicationController
   before_action :set_animal, only: %i[show edit update destroy]
-  rescue_from ActiveRecord::InvalidForeignKey, with: :invalid_foreign_key
+  rescue_from ActiveRecord::InvalidForeignKey, ActiveRecord::DeleteRestrictionError, with: :invalid_foreign_key
 
   def index
     @animals = Animal.all
